@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarios = new Usuarios();
     $usuario = $usuarios->selectAllByEmail($email);
 
-    if ($usuario && password_verify($senha, $usuario['senha'])) {
+    if ($usuario && $senha==$usuario['senha']) {
         $_SESSION['usuario'] = $usuario['nome']; // Armazenar o nome do usuário na sessão, por exemplo
         header('Location: ../adminPage.php'); // Redirecionar para a página do menu
         exit();

@@ -9,9 +9,22 @@ class Usuarios {
     }
 
     public function insert($nome, $fk_empresa, $email, $senha) {
+        if ($this->emailExists($email)) {
+            // Se o e-mail já existir, retorne false para indicar falha na inserção
+            return false;
+        }
         $sql = "INSERT INTO usuarios (nome, fk_empresa, email, senha) VALUES ('$nome', $fk_empresa, '$email', '$senha')";
-        echo $sql;
+
         return $this->conexao->query($sql);
+    }
+
+    public function emailExists($email) {
+        // Verifica se o e-mail já existe na tabela de usuários
+        $email = $this->conexao->real_escape_string($email);
+        $sql = "SELECT * FROM usuarios WHERE email='$email'";
+        $result = $this->conexao->query($sql);
+
+        return $result->num_rows > 0;
     }
 
     public function selectAll() {

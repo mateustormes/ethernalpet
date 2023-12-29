@@ -33,13 +33,7 @@
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-lg-5">
             <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-white pr-3" href="">FAQs</a>
-                    <span class="text-white">|</span>
-                    <a class="text-white px-3" href="">Help</a>
-                    <span class="text-white">|</span>
-                    <a class="text-white pl-3" href="">Support</a>
-                </div>
+                
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
@@ -64,7 +58,7 @@
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
-                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Pet</span>Lover</h1>
+                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Ethernal</span>Pets</h1>
                 </a>
             </div>
             <div class="col-lg-8 text-center text-lg-right">
@@ -100,10 +94,7 @@
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="index.php" class="nav-item nav-link active">Home</a>
-                    <a href="about.php" class="nav-item nav-link">About</a>
-                    <a href="service.php" class="nav-item nav-link">Service</a>
-                    <a href="price.php" class="nav-item nav-link">Price</a>
-                    <a href="booking.php" class="nav-item nav-link">Booking</a>
+                    
                     <?php 
                     require_once 'backend/Categorias.php'; // Certifique-se de que o nome do arquivo corresponda ao utilizado no backend
 
@@ -115,17 +106,17 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.php" class="dropdown-item">Blog Grid</a>
-                            <a href="single.php" class="dropdown-item">Blog Detail</a>
+                            <a href="about.php" class="dropdown-item">About</a>
+                            <a href="service.php" class="dropdown-item">Service</a>
+                            <a href="price.php" class="dropdown-item">Price</a>
+                            <a href="booking.php" class="dropdown-item">Booking</a>
                         </div>
                     </div>
-                    <a href="contact.php" class="nav-item nav-link">Contact</a>
-                    
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Acessar</a>
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
+                    <a href="contact.php" class="nav-item nav-link">Contato</a>
                     
                 </div>
-                <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
+                <a href="#" class="btn btn-lg btn-success px-3 d-none d-lg-block" data-toggle="modal" data-target="#loginModal">Acessar</a>
+                <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block"data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
             </div>
         </nav>
     </div>

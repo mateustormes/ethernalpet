@@ -16,14 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome']) && isset($_PO
     // Insira o novo usuário
     $result = $usuarios->insert($nome, $fk_empresa, $email, $senha);
 
-    if ($result) {
+    if ($result !== false) {
         // Redirecione de volta para a página anterior após o cadastro
-        header('Location: ../pagina_usuarios.php');
+        $_SESSION['mensagem'] = "Usuário cadastrado com sucesso!";
         exit;
     } else {
-        // Exiba uma mensagem de erro em caso de falha na inserção
-        echo "Erro ao cadastrar o usuário. Por favor, tente novamente.";
+        // Exiba uma mensagem de erro se o e-mail já existir
+        $_SESSION['mensagem'] = "Erro ao cadastrar o usuário. Por favor, tente novamente.";
     }
+
+    header("Location: ../pagina_usuarios.php?mensagem=" . urlencode($_SESSION['mensagem']));
 } else {
     // Exiba uma mensagem de erro se os campos necessários não estiverem definidos
     echo "Erro nos parâmetros do formulário. Por favor, preencha todos os campos.";

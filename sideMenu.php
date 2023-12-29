@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>PetLover - Pet Care Website Template</title>
+    <title>Ethernal Pets</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -64,7 +64,7 @@
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
-                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Pet</span>Lover</h1>
+                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Ethernal</span>Pets</h1>
                 </a>
             </div>
             <div class="col-lg-8 text-center text-lg-right">
@@ -99,7 +99,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="index.php" class="nav-item nav-link active">Home</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_categoria.php')">Categorias</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_empresas.php')">Empresas</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_posts.php')">Posts</a>
@@ -107,13 +107,13 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
+                            <a href="blog.php" class="dropdown-item">Blog Grid</a>
+                            <a href="single.php" class="dropdown-item">Blog Detail</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contatos</a>
+                    <a href="contact.php" class="nav-item nav-link">Contatos</a>
                 </div>
-                <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
+                <!-- <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a> -->
             </div>
         </nav>
     </div>

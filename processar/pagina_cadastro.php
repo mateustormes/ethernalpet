@@ -10,10 +10,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarios = new Usuarios();
     $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
 
-    if ($usuarios->insert($nome, $fk_empresa, $email, $hashedSenha)) {
-        echo 'Cadastro realizado com sucesso!';
-    } else {
-        echo 'Falha no cadastro.';
-    }
+     // Insira o novo usuário
+     $result = $usuarios->insert($nome, $fk_empresa, $email, $senha);
+
+     if ($result !== false) {
+         // Redirecione de volta para a página anterior após o cadastro
+         $_SESSION['mensagem'] = "Usuário cadastrado com sucesso!";
+         exit;
+     } else {
+         // Exiba uma mensagem de erro se o e-mail já existir
+         $_SESSION['mensagem'] = "Erro ao cadastrar o usuário. Por favor, tente novamente.";
+     }
+
+     header("Location: ../pagina_usuarios.php?mensagem=" . urlencode($_SESSION['mensagem']));
 }
 ?>

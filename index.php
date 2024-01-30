@@ -260,9 +260,9 @@
                         </div>
                         <div class="card-footer border-0 p-0">
                             <?php if($cont%2==0){ ?>
-                            <a href="" class="btn btn-secondary btn-block p-3" style="border-radius: 0;">Signup Now</a>
+                            <a href="#" class="btn btn-secondary btn-block p-3" style="border-radius: 0;" data-toggle="modal" data-target="#loginModal">Acessar</a>
                             <?php }else{ ?>
-                            <a href="" class="btn btn-primary btn-block p-3" style="border-radius: 0;">Signup Now</a>
+                            <a href="#" class="btn btn-primary btn-block p-3" style="border-radius: 0;" data-toggle="modal" data-target="#loginModal">Acessar</a>
                             <?php } ?>
                         </div>
                     </div>

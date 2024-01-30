@@ -27,6 +27,12 @@ class Posts {
         return $posts;
     }
 
+    public function selectAllByFkCategoria($fk_categoria) {
+        $sql = "SELECT count(id) qtd FROM posts WHERE fk_categoria = $fk_categoria";
+        $result = $this->conexao->query($sql);
+        return $result->fetch_assoc();
+    }
+
     public function selectPostsItensPostAll($categoriaId) {
         $sql = "SELECT posts.id as post_id, posts.nome_post, posts.dt_user, usuarios.nome as nome_usuario, 
                        itens_post.item, itens_post.nome_pet, itens_post.informacoes_pet
@@ -46,7 +52,7 @@ class Posts {
     }
 
     public function selectById($id) {
-        $sql = "SELECT * FROM posts WHERE id=$id";
+        $sql = "SELECT po.*, itp.informacoes_pet infpet, itp.nome_pet nome_pet, itp.item foto_item_pet FROM posts po, itens_post itp WHERE po.id=$id AND po.id = itp.fk_post";
         $result = $this->conexao->query($sql);
         return $result->fetch_assoc();
     }

@@ -14,6 +14,18 @@ class Categoria {
     }
 
     public function selectAll() {
+        $sql = "SELECT * FROM categoria";
+        $result = $this->conexao->query($sql);
+        $categorias = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $categorias[] = $row;
+        }
+
+        return $categorias;
+    }
+
+    public function selectAllWhereDisplay() {
         $sql = "SELECT * FROM categoria where display_on_menu = 'S'";
         $result = $this->conexao->query($sql);
         $categorias = [];

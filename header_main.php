@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+require_once 'backend/ConfiguracoesSite.php';
+$configuracoesSite = new ConfiguracoesSite();
+$configuracoesSites = $configuracoesSite->selectAll();
+$namesSite = explode(" ", $configuracoesSites['name_site']);
+?>
 <head>
     <meta charset="utf-8">
     <title>PetLover - Pet Care Website Template</title>
@@ -37,19 +42,19 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" target="_blank" href="<?php echo $configuracoesSites['facebook']; ?>">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" target="_blank" href="<?php echo $configuracoesSites['twitter']; ?>">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" target="_blank" href="<?php echo $configuracoesSites['linkedin']; ?>">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" target="_blank" href="<?php echo $configuracoesSites['instagram']; ?>">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-white pl-3" href="">
+                    <a class="text-white pl-3" target="_blank" href="<?php echo $configuracoesSites['youtube']; ?>">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -58,22 +63,22 @@
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
-                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Ethernal</span>Pets</h1>
+                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary"><?php echo $namesSite['0']; ?></span><?php echo $namesSite['1']; ?></h1>
                 </a>
             </div>
             <div class="col-lg-8 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="d-inline-flex flex-column text-center pr-3 border-right">
                         <h6>Opening Hours</h6>
-                        <p class="m-0">24HRS</p>
+                        <p class="m-0"><?php echo $configuracoesSites['horario_abertura']; ?></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
-                        <h6>Email Us</h6>
-                        <p class="m-0">mateus.tormes@hotmail.com</p>
+                        <h6>Email</h6>
+                        <p class="m-0"><?php echo $configuracoesSites['email_contato']; ?></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center pl-3">
-                        <h6>Call Us</h6>
-                        <p class="m-0">+18 997648751</p>
+                        <h6>Telefone</h6>
+                        <p class="m-0"><?php echo $configuracoesSites['telefone_contato'];?></p>
                     </div>
                 </div>
             </div>
@@ -99,7 +104,7 @@
                     require_once 'backend/Categorias.php'; // Certifique-se de que o nome do arquivo corresponda ao utilizado no backend
 
                     $categoriaObj = new Categoria();
-                    $categorias = $categoriaObj->selectAll();
+                    $categorias = $categoriaObj->selectAllWhereDisplay();
                     foreach ($categorias as $categoria): ?>
                         <a href="blog.php?id=<?= $categoria['id'];?>" class="nav-item nav-link"><?= $categoria['nome']; ?></a>
                     <?php endforeach; ?>

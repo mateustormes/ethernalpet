@@ -1,15 +1,8 @@
- <?php 
- require_once 'backend/ConfiguracoesSite.php';
-$configuracoesSite = new ConfiguracoesSite();
-$configuracoesSites = $configuracoesSite->selectAll();
-
-
- ?>
  <!-- Footer Start -->
  <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-4 col-md-12 mb-5">
-                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Ethernal</span>Pets</h1>
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary"><?php echo $namesSite['0']; ?></span><?php echo $namesSite['1']; ?></h1>
                 <p class="m-0"><?php echo $configuracoesSites['descricao_rodape'];?></p>
             </div>
             <div class="col-lg-8 col-md-12">

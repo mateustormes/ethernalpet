@@ -63,11 +63,31 @@
                 </button>
             </div>
             <div class="modal-body text-center">
+            <?php
+
+// Chave PIX fornecida
+$chavePix = "00020126330014BR.GOV.BCB.PIX01114500618180052040000530398654040.015802BR5924Mateus Tormes Gervazioni6009SAO PAULO61080540900062250521ZH2uDFf19hGEk7Z1esl8o6304DBF9";
+
+// URL da API goqr.me para gerar QR Code
+$apiUrl = "https://api.qrserver.com/v1/create-qr-code/";
+
+// Parâmetros da requisição
+$params = [
+    'size' => '300x300', // Tamanho do QR Code
+    'data' => $chavePix, // Dados a serem codificados no QR Code
+];
+
+// Construa a URL completa
+$fullUrl = $apiUrl . '?' . http_build_query($params);
+
+// Exiba o QR Code
+echo '<img src="' . $fullUrl . '" alt="QR Code PIX">';
+
+?>
+
+
                 <p>Escaneie o QR Code abaixo para efetuar o pagamento:</p>
-                <img id="qrCodeImg" src="" alt="QR Code Pix">
-                <p>Ou utilize o metodo abaixo: </p>
-                <p>00020126330014BR.GOV.BCB.PIX01114500618180052040000530398654040.015802BR5924Mateus Tormes Gervazioni6009SAO PAULO621405101t2InnFpVl630464E8</p>
-            </div>
+             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
@@ -78,51 +98,8 @@
 
 <script>
     function abrirModal(idPromocao, preco) {
-        // ... (código anterior)
-
-        // Crie o QR Code com os dados do Pix
-        var qrCodeData = "00020126330014BR.GOV.BCB.PIX01114500618180052040000530398654040.015802BR5924Mateus Tormes Gervazioni6009SAO PAULO621405101t2InnFpVl630464E8";
-        qrCodeData += "62070502" + idPromocao.toString().padStart(2, '0') + "530398654040" + preco.toString().padStart(11, '0') + "6304";
-
-        // Atualize a imagem do QR Code na modal
-        document.getElementById('qrCodeImg').src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrCodeData);
-
         // Abra a modal
         $('#comprarModal').modal('show');
-
-        // Inicialize a QuaggaJS
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                constraints: {
-                    width: 640,
-                    height: 480,
-                    facingMode: "environment"
-                },
-            },
-            decoder: {
-                readers: ["code_128_reader"]
-            },
-        }, function (err) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            Quagga.start();
-        });
-
-        // Adicione um ouvinte para processar o código escaneado
-        Quagga.onDetected(function (result) {
-            // Resultado do escaneamento
-            var code = result.codeResult.code;
-
-            // Faça algo com o código escaneado (por exemplo, enviar para o backend para verificação)
-            console.log("Código escaneado:", code);
-
-            // Pare a QuaggaJS após escanear um código (opcional)
-            Quagga.stop();
-        });
     }
 </script>
 

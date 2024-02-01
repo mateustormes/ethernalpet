@@ -2,11 +2,17 @@
 // Inclua a classe Categorias
 require_once '../backend/Categorias.php';
 
+$displayMenu = null;
+if(!isset($_POST['display_on_menu'])){
+    $displayMenu = 'N';
+}else{
+    $displayMenu  = $_POST['display_on_menu'];
+}
 // Verifique se o formulário foi submetido e se os campos necessários estão definidos
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome']) && isset($_POST['display_on_menu'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome']) && $displayMenu != null) {
     // Recupere os dados do formulário
     $nome = $_POST['nome'];
-    $display_on_menu = ($_POST['display_on_menu'] === 'S') ? 'S' : 'N';
+    $display_on_menu = ($displayMenu === 'S') ? 'S' : 'N';
 
     // Crie uma instância da classe Categorias
     $categorias = new Categoria();

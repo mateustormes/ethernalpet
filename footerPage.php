@@ -26,7 +26,7 @@
                             <?php 
                                 require_once 'backend/Categorias.php';
                                 $categoriaObj = new Categoria();
-                                $categorias = $categoriaObj->selectAll();
+                                $categorias = $categoriaObj->selectAllWhereDisplay();
                                 foreach ($categorias as $categoria): ?>
                                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i><?= $categoria['nome']; ?></a>
                             <?php endforeach; ?>

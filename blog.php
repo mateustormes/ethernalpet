@@ -49,7 +49,6 @@ $postsPagina = array_slice($postsLists, $indiceInicio, $postsPorPagina);
                                     <small class="mr-2"><i class="fa fa-folder text-muted"></i> </small>
                                     <small class="mr-2"><i class="fa fa-comments text-muted"></i> 15</small>
                                 </div>
-                                <p><?= $post['informacoes_pet']; ?></p>
                                 <a class="font-weight-bold" href="single.php?id=<?=$post['post_id'];?>">Read More</a>
                             </div>
                         </div>

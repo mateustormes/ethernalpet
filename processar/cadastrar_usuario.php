@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome']) && isset($_PO
     $fk_empresa = $_POST['fk_empresa'];
     $email = $_POST['email'];
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Use hash para armazenar senhas de forma segura
-
+    $admin = $_POST['admin'];
     // Crie uma instância da classe Usuarios
     $usuarios = new Usuarios();
 
     // Insira o novo usuário
-    $result = $usuarios->insert($nome, $fk_empresa, $email, $senha);
+    $result = $usuarios->insert($nome, $fk_empresa, $email, $senha, $admin);
 
     if ($result !== false) {
         // Redirecione de volta para a página anterior após o cadastro

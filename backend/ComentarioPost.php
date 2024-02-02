@@ -40,6 +40,18 @@ class ComentarioPost {
         return $result->fetch_assoc();
     }
 
+    public function selectByFkPostId($id) {
+        $sql = "SELECT * FROM comentarios_post WHERE fk_post=$id";
+        $result = $this->conexao->query($sql);
+        $comentarios = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $comentarios[] = $row;
+        }
+
+        return $comentarios;
+    }
+
     public function update($id, $fk_post, $nome, $email, $mensagem) {
         $sql = "UPDATE comentarios_post SET fk_post=?, nome=?, email=?, mensagem=? WHERE id=?";
         $stmt = $this->conexao->prepare($sql);

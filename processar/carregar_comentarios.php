@@ -3,8 +3,9 @@
 
 require_once '../backend/ComentarioPost.php';
 
+$id = $_GET['id_post'];
 $comentarioPost = new ComentarioPost();
-$comentarios = $comentarioPost->selectAll();
+$comentarios = $comentarioPost->selectByFkPostId($id);
 
 // Retorna os comentários como JSON
 echo json_encode($comentarios);

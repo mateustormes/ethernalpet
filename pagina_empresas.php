@@ -62,13 +62,17 @@
                 <!-- Formulário de cadastro de empresa -->
                 <form action="processar/cadastrar_empresa.php" method="post">
                     <!-- Campos do formulário -->
-                    <input type="text" name="nome" placeholder="Nome" required>
-                    <input type="text" name="endereco" placeholder="Endereço" required>
-                    <input type="text" name="cnpj" placeholder="CNPJ" required>
-                    <!-- Adicione outros campos conforme necessário -->
-
-                    <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    
+                    <label>Informe o nome da sua empresa:</label><br>
+                    <input class="col-md-12" type="text" name="nome" placeholder="Nome" required><br>
+                    <label>Informe o endereço da empresa:</label><br>
+                    <input class="col-md-12" type="text" name="endereco" placeholder="Endereço" required><br>
+                    <label>Informe o CNPJ:</label><br>
+                    <input class="col-md-12" type="text" name="cnpj" placeholder="CNPJ" required><br>
+                    <br>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
                 </form>
             </div>
         </div>
@@ -113,15 +117,16 @@
                     <!-- Adicione um campo oculto para armazenar o id_empresa -->
                     <input type="hidden" name="id_empresa" id="editarEmpresa-id" value="">
 
-                    <!-- Campos do formulário preenchidos com os dados da empresa -->
-                    <input type="text" name="nome" id="editarEmpresa-nome" required>
-                    <input type="text" name="endereco" id="editarEmpresa-endereco" required>
-                    <input type="text" name="cnpj" id="editarEmpresa-cnpj" required>
-
-                    <!-- Adicione outros campos conforme necessário -->
-
-                    <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    <label>Informe o nome da sua empresa:</label><br>
+                    <input class="col-md-12" type="text" name="nome" id="editarEmpresa-nome" required><br>
+                    <label>Informe o endereço da empresa:</label><br>
+                    <input class="col-md-12" type="text" name="endereco" id="editarEmpresa-endereco" required><br>
+                    <label>Informe o CNPJ:</label><br>
+                    <input class="col-md-12" type="text" name="cnpj" id="editarEmpresa-cnpj" required><br>
+                    <br>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    </center>
                 </form>
 
             </div>

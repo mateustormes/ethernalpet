@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Foto</th>
                     <th>Nome do Post</th>
                     <th>Data de Criação</th>
                     <th>Código do Usuário</th>
@@ -24,8 +25,13 @@
                 $postsList = $posts->selectAll();
 
                 foreach ($postsList as $post) {
-                    echo '<tr>';
+                    
+                    $imagem_base64 = base64_encode($post['img']);
+                    echo '<tr>';                    
                     echo '<td>' . $post['id'] . '</td>';
+                    echo '<td>';
+                    echo '<img src="data:image/*;base64,' . $imagem_base64 . '" alt="Imagem do Item" style="max-width: 100px; max-height: 100px;">';
+                    echo '</td>';
                     echo '<td>' . $post['nome_post'] . '</td>';
                     echo '<td>' . $post['dt_user'] . '</td>';
                     echo '<td>' . $post['cd_user'] . '</td>';
@@ -66,19 +72,21 @@
                 <!-- Formulário de cadastro de post -->
                 <form action="processar/cadastrar_post.php" method="post" enctype="multipart/form-data">
                     <!-- Campos do formulário -->
-                    <label>Nome</label>
-                    <input type="text" name="nome" placeholder="Nome do Post" required><br>
-                    <label>Data</label>
-                    <input type="datetime-local" name="data" required><br>
-                    <label>Código do Usuário</label>
-                    <input type="number" name="codigo" placeholder="Código do Usuário" required><br>
-                    <label>Código de Categoria</label>
-                    <input type="number" name="categoria" placeholder="ID da Categoria" required><br>
+                    <label>Informe o nome do post:</label><br>
+                    <input class="col-md-12" type="text" name="nome" placeholder="Nome do Post" required><br>
+                    <label>Data</label><br>
+                    <input class="col-md-12" type="datetime-local" name="data" required><br>
+                    <label>Código do Usuário</label><br>
+                    <input class="col-md-12" type="number" name="codigo" placeholder="Código do Usuário" required><br>
+                    <label>Código de Categoria</label><br>
+                    <input class="col-md-12" type="number" name="categoria" placeholder="ID da Categoria" required><br>
                     <!-- Adicione outros campos conforme necessário -->
-                    <label>Imagem</label>
-                    <input type="file" name="imagem" accept="image/*" required><br>
-                    <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <label>Imagem</label><br>
+                    <input class="col-md-12" type="file" name="imagem" accept="image/*" required><br>
+                    <!-- Botão de enviar --><br>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
                 </form>
             </div>
         </div>
@@ -124,15 +132,20 @@
                     <!-- Adicione um campo oculto para armazenar o id_post -->
                     <input type="hidden" name="id_post" id="editarPost-id" value="">
 
-                    <!-- Campos do formulário preenchidos com os dados do post -->
-                    <input type="text" name="nome_post" id="editarPost-nome" required>
-                    <input type="datetime-local" name="dt_user" id="editarPost-data" required>
-                    <input type="number" name="cd_user" id="editarPost-codigo" required>
-                    <input type="number" name="fk_categoria" id="editarPost-categoria" required>
+                    <label>Informe o nome do post:</label><br>
+                    <input class="col-md-12" type="text" name="nome_post" id="editarPost-nome" required><br>
+                    <label>Data</label><br>
+                    <input class="col-md-12" type="datetime-local" name="dt_user" id="editarPost-data" required><br>
+                    <label>Código do Usuário</label><br>
+                    <input class="col-md-12" type="number" name="cd_user" id="editarPost-codigo" required><br>
+                    <label>Código de Categoria</label><br>
+                    <input class="col-md-12" type="number" name="fk_categoria" id="editarPost-categoria" required><br>
                     <!-- Adicione outros campos conforme necessário -->
 
-                    <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    <br>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    </center>
                 </form>
 
             </div>

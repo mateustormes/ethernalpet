@@ -28,7 +28,7 @@
                     echo '<td>' . $usuario['id'] . '</td>';
                     echo '<td>' . $usuario['nome'] . '</td>';
                     echo '<td>' . $usuario['email'] . '</td>';
-                    echo '<td>' . ($usuario['administrador'] ? 'Sim' : 'Não') . '</td>';
+                    echo '<td>' . ($usuario['administrador'] == 'S' ? 'Sim' : 'Não') . '</td>';
                     echo '<td>
                             <button onclick="showInfo(' . $usuario['id'].','.$usuario['nome'].','.$usuario['email'] . ')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoModal" 
                                     data-user-id="' . $usuario['id'] . '" 
@@ -69,6 +69,7 @@
                     <input type="text" name="nome" placeholder="Nome" required>
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="senha" placeholder="Senha" required>
+                    <input type="text" name="admin" placeholder="Admin" required value="F">
                     <!-- Adicione outros campos conforme necessário -->
                     
                     <!-- Botão de enviar -->
@@ -118,6 +119,7 @@
                     <input type="hidden" name="id_usuario" value="<?php echo $usuario['id']; ?>">
                     <input type="text" name="nome" id="editar-nome" required>
                     <input type="email" name="email" id="editar-email" required>
+                    <input type="text" name="admin" id="admin" required value="<?php echo $usuario['administrador']; ?>">
                     <!-- Adicione outros campos conforme necessário -->
 
                     <!-- Botão de Alterar Admin -->

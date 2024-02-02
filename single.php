@@ -5,6 +5,7 @@ $id = $_GET['id'];
 
 $post = $posts->selectById($id);
 $imagem_base64 = base64_encode($post['img']);
+$imagem_foto = base64_encode($post['foto_item_pet']);
 ?>
 
 
@@ -24,6 +25,7 @@ $imagem_base64 = base64_encode($post['img']);
 
                 <div class="mb-5">
                     <img class="card-img-top" src="data:image/jpeg;base64,<?= $imagem_base64; ?>" alt="">
+                    <img class="card-img-top" src="data:image/jpeg;base64,<?= $imagem_foto; ?>" alt="">
                     
                     <p><?= $post['nome_pet']; ?></p>
                     <p><?= $post['infpet']; ?></p>
@@ -90,7 +92,7 @@ $imagem_base64 = base64_encode($post['img']);
                 <div class="mb-5">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="Keyword">
+                            <input type="text" class="form-control form-control-lg" placeholder="Pesquisar">
                             <div class="input-group-append">
                                 <span class="input-group-text bg-transparent text-primary"><i
                                         class="fa fa-search"></i></span>
@@ -99,14 +101,14 @@ $imagem_base64 = base64_encode($post['img']);
                     </form>
                 </div>
                 <div class="mb-5">
-                    <h3 class="mb-4">Categories</h3>
+                    <h3 class="mb-4">Categorias</h3>
                     
                     <ul class="list-group">
                     <?php 
                         require_once 'backend/Categorias.php'; // Certifique-se de que o nome do arquivo corresponda ao utilizado no backend
 
                         $categoriaObj = new Categoria();
-                        $categorias = $categoriaObj->selectAll();
+                        $categorias = $categoriaObj->selectAllWhereDisplay();
                         foreach ($categorias as $categoria): 
                             $postsCat = new Posts();
                             $postCatList = $postsCat->selectAllByFkCategoria($categoria['id']);
@@ -226,9 +228,10 @@ $imagem_base64 = base64_encode($post['img']);
         }
 
         // Função para carregar os comentários
-        function carregarComentarios() {
+        function carregarComentarios(id) {
+            console.log(id);
             $.ajax({
-                url: 'processar/carregar_comentarios.php', // Nome da página que irá carregar os comentários
+                url: 'processar/carregar_comentarios.php?id_post='+id, // Nome da página que irá carregar os comentários
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -246,26 +249,46 @@ $imagem_base64 = base64_encode($post['img']);
             var container = $('#comentariosContainer');
             var qtdComentarios = document.getElementById("qtdComentarios");
             qtdComentarios.innerHTML = comentarios.length+" Comentários";
-            $.each(comentarios, function (index, comentario) {
-                // Criar o HTML para cada comentário
-                var comentarioHtml = `
-                    <div class="media mb-4">
-                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                        <div class="media-body">
-                            <h6>${comentario.nome} <small><i>${comentario.data}</i></small></h6>
-                            <p>${comentario.mensagem}</p>
+            if(comentarios.length > 0){
+                $.each(comentarios, function (index, comentario) {
+                    // Criar o HTML para cada comentário
+                    var comentarioHtml = `
+                        <div class="media mb-4">
+                            <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                            <div class="media-body">
+                                <h6>${comentario.nome} <small><i>${comentario.data}</i></small></h6>
+                                <p>${comentario.mensagem}</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
 
+                    // Adicionar o HTML do comentário ao container
+                    container.append(comentarioHtml);
+                });
+            }else{
+                var comentarioHtml = `
+                        <div class="media mb-4">
+                            <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                            <div class="media-body">
+                                <h6>Admin <small><i></i></small></h6>
+                                <p>Não foi encontrado nenhum comentário realizado ainda para está publicação.</p>
+                            </div>
+                        </div>
+                    `;
                 // Adicionar o HTML do comentário ao container
                 container.append(comentarioHtml);
-            });
+            }
+            
         }
 
         // Chamar a função para carregar os comentários quando a página carregar
         $(document).ready(function () {
-            carregarComentarios();
+            const queryString = window.location.search;
+            // Criar um objeto URLSearchParams a partir da string de consulta
+            const params = new URLSearchParams(queryString);
+            // Obter o valor do parâmetro 'id'
+            const id = params.get('id');
+            carregarComentarios(id);
         });
     </script>
     <?php include('footerPage.php'); ?>

@@ -8,12 +8,12 @@ class Usuarios {
         $this->conexao = (new Conexao())->getConexao();
     }
 
-    public function insert($nome, $fk_empresa, $email, $senha) {
+    public function insert($nome, $fk_empresa, $email, $senha, $admin) {
         if ($this->emailExists($email)) {
             // Se o e-mail já existir, retorne false para indicar falha na inserção
             return false;
         }
-        $sql = "INSERT INTO usuarios (nome, fk_empresa, email, senha) VALUES ('$nome', $fk_empresa, '$email', '$senha')";
+        $sql = "INSERT INTO usuarios (nome, fk_empresa, email, senha, administrador) VALUES ('$nome', $fk_empresa, '$email', '$senha', '$admin')";
 
         return $this->conexao->query($sql);
     }

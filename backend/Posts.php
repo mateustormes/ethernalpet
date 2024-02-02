@@ -34,11 +34,9 @@ class Posts {
     }
 
     public function selectPostsItensPostAll($categoriaId) {
-        $sql = "SELECT posts.id as post_id, posts.nome_post, posts.dt_user, usuarios.nome as nome_usuario, 
-                       itens_post.item, itens_post.nome_pet, itens_post.informacoes_pet
+        $sql = "SELECT posts.id as post_id, posts.nome_post, posts.dt_user, usuarios.nome as nome_usuario, posts.img item
                 FROM posts
                 INNER JOIN usuarios ON posts.cd_user = usuarios.id
-                INNER JOIN itens_post ON posts.id = itens_post.fk_post
                 WHERE posts.fk_categoria =$categoriaId";
         
         $result = $this->conexao->query($sql);

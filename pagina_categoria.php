@@ -60,9 +60,10 @@
                 <!-- Formulário de cadastro de categoria -->
                 <form action="processar/cadastrar_categoria.php" method="post">
                     <!-- Campos do formulário -->
+                    <label>Informe o nome da categoria:</label><br>
                     <input type="text" name="nome" placeholder="Nome" required>
                     <div class="form-group">
-                        <label for="displayOnMenuCheckbox">Exibir no Menu:</label>
+                        <label for="displayOnMenuCheckbox">Exibir no Menu:</label><br>
                         <input type="checkbox" id="displayOnMenuCheckbox" name="display_on_menu" value="S" checked>
                     </div>
                     <!-- Adicione outros campos conforme necessário -->
@@ -115,10 +116,10 @@
                     <!-- Campo oculto para armazenar o valor atual de display_on_menu -->
                     <input type="hidden" name="display_on_menu" id="editarCategoria-display" value="">
 
-                    <!-- Campos do formulário preenchidos com os dados da categoria -->
+                    <label>Informe o nome da categoria:</label><br>
                     <input type="text" name="nome" id="editarCategoria-nome" required>
                     <div class="form-group">
-                        <label for="editarCategoriaDisplayCheckbox">Exibir no Menu:</label>
+                        <label for="editarCategoriaDisplayCheckbox">Exibir no Menu:</label><br>
                         <input type="checkbox" id="editarCategoriaDisplayCheckbox" name="display_on_menu" value="S">
                     </div>
                     <!-- Adicione outros campos conforme necessário -->

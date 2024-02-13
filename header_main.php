@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+
+session_start();
 require_once 'backend/ConfiguracoesSite.php';
 $configuracoesSite = new ConfiguracoesSite();
 $configuracoesSites = $configuracoesSite->selectAll();
@@ -108,7 +110,7 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
                     foreach ($categorias as $categoria): ?>
                         <a href="blog.php?id=<?= $categoria['id'];?>" class="nav-item nav-link"><?= $categoria['nome']; ?></a>
                     <?php endforeach; ?>
-                    <div class="nav-item dropdown">
+                    <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="about.php" class="dropdown-item">About</a>
@@ -116,12 +118,16 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
                             <a href="price.php" class="dropdown-item">Price</a>
                             <a href="booking.php" class="dropdown-item">Booking</a>
                         </div>
-                    </div>
+                    </div> -->
                     <a href="contact.php" class="nav-item nav-link">Contato</a>
                     
                 </div>
-                <a href="#" class="btn btn-lg btn-success px-3 d-none d-lg-block" data-toggle="modal" data-target="#loginModal">Acessar</a>
-                <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block"data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
+                <?php if (empty($_SESSION)) { ?>
+                    <a href="#" class="btn btn-lg btn-success px-3 d-none d-lg-block" data-toggle="modal" data-target="#loginModal">Acessar</a>
+                    <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block"data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
+                <?php }else{ ?>      
+                    <a href="adminPage.php" style="text-decoration: none;" class="px-3 d-none d-lg-block"><?php echo "Bem vindo ".$_SESSION['usuario']; ?></a>
+                <?php } ?>
             </div>
         </nav>
     </div>

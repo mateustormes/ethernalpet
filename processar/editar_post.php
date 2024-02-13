@@ -4,13 +4,13 @@ require_once '../backend/Posts.php'; // Substitua pelo caminho correto do seu ar
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     print_r($_POST);
     // Certifique-se de que os dados foram recebidos do formulário
-    if (isset($_POST['id_post'], $_POST['nome_post'], $_POST['dt_user'], $_POST['cd_user'], $_POST['fk_categoria'])) {
+    if (isset($_POST['id_post'], $_POST['nome_post'], $_POST['dt_user'], $_POST['cd_user'], $_POST['categoria'])) {
         // Obtenha os dados do formulário
         $id_post = $_POST['id_post'];
         $nome_post = $_POST['nome_post'];
         $dt_user = $_POST['dt_user'];
         $cd_user = $_POST['cd_user'];
-        $fk_categoria = $_POST['fk_categoria'];
+        $fk_categoria = $_POST['categoria'];
 
         // Crie uma instância da classe Posts
         $posts = new Posts();

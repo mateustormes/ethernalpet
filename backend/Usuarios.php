@@ -39,6 +39,22 @@ class Usuarios {
         return $usuarios;
     }
 
+    public function selectByUserId($user_id) {
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $usuarios = [];
+    
+        while ($row = $result->fetch_assoc()) {
+            $usuarios[] = $row;
+        }
+    
+        return $usuarios;
+    }
+
     public function selectAllByEmail($email) {
         $email = $this->conexao->real_escape_string($email);
         $sql = "SELECT * FROM usuarios WHERE email='$email'";
@@ -53,7 +69,7 @@ class Usuarios {
     }
 
     public function update($id_usuario, $nome, $email, $admin) {
-        $sql = "UPDATE usuarios SET nome = '$nome', email = '$email', administrador = $admin WHERE id = $id_usuario";
+        $sql = "UPDATE usuarios SET nome = '$nome', email = '$email', administrador = '$admin' WHERE id = $id_usuario";
     
         return $this->conexao->query($sql);
     }

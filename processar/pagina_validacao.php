@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $usuarios->selectAllByEmail($email);
 
     if ($usuario && $senha==$usuario['senha']) {
-        $_SESSION['usuario'] = $usuario['nome']; // Armazenar o nome do usuário na sessão, por exemplo
-        $_SESSION['id_usuario'] = $usuario['id']; // Armazenar o nome do usuário na sessão, por exemplo
+        $_SESSION['usuario'] = $usuario['nome']; // Armazenar o nome do usuário na sessão
+        $_SESSION['id_usuario'] = $usuario['id']; // Armazenar o nome do usuário na sessão
+        $_SESSION['admin'] = $usuario['administrador']; // Armazenar o nome do usuário na sessão
         header('Location: ../adminPage.php'); // Redirecionar para a página do menu
         exit();
     } else {

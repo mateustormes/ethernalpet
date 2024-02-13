@@ -22,38 +22,48 @@
                 <?php
                 require_once 'backend/Posts.php';
                 $posts = new Posts();
-                $postsList = $posts->selectAll();
-
-                foreach ($postsList as $post) {
-                    
-                    $imagem_base64 = base64_encode($post['img']);
-                    echo '<tr>';                    
-                    echo '<td>' . $post['id'] . '</td>';
-                    echo '<td>';
-                    echo '<img src="data:image/*;base64,' . $imagem_base64 . '" alt="Imagem do Item" style="max-width: 100px; max-height: 100px;">';
-                    echo '</td>';
-                    echo '<td>' . $post['nome_post'] . '</td>';
-                    echo '<td>' . $post['dt_user'] . '</td>';
-                    echo '<td>' . $post['cd_user'] . '</td>';
-                    echo '<td>' . $post['fk_categoria'] . '</td>';
-                    echo '<td>
-                            <button class="btn btn-success btn-sm" onclick="visualizarItensPost(' . $post['id'] . ')">Visualizar Itens Post</button>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoPostModal"
-                                    data-post-nome="' . $post['nome_post'] . '"
-                                    data-post-data="' . $post['dt_user'] . '"
-                                    data-post-codigo="' . $post['cd_user'] . '"
-                                    data-post-categoria="' . $post['fk_categoria'] . '">Info</button>
-                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarPostModal"
-                                    data-post-id="' . $post['id'] . '"
-                                    data-post-nome="' . $post['nome_post'] . '"
-                                    data-post-data="' . $post['dt_user'] . '"
-                                    data-post-codigo="' . $post['cd_user'] . '"
-                                    data-post-categoria="' . $post['fk_categoria'] . '">Editar</button>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerPostModal" data-post-id="'.$post['id'].'">Remover</button>
-                        </td>';
-                    echo '</tr>';
+                if($_SESSION['admin'] == 'S'){                    
+                    $postsList = $posts->selectAll();
+                }else{
+                    $postsList = $posts->selectByCdUser($_SESSION['id_usuario']);
                 }
-                ?>
+                if(count($postsList) > 0 ){
+                    foreach ($postsList as $post) {
+                        
+                        $imagem_base64 = base64_encode($post['img']);
+                        echo '<tr>';                    
+                        echo '<td>' . $post['id'] . '</td>';
+                        echo '<td>';
+                        echo '<img src="data:image/*;base64,' . $imagem_base64 . '" alt="Imagem do Item" style="max-width: 100px; max-height: 100px;">';
+                        echo '</td>';
+                        echo '<td>' . $post['nome_post'] . '</td>';
+                        echo '<td>' . $post['dt_user'] . '</td>';
+                        echo '<td>' . $post['cd_user'] . '</td>';
+                        echo '<td>' . $post['fk_categoria'] . '</td>';
+                        echo '<td>
+                                <button class="btn btn-success btn-sm" onclick="visualizarItensPost(' . $post['id'] . ')">Visualizar Itens Post</button>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoPostModal"
+                                        data-post-nome="' . $post['nome_post'] . '"
+                                        data-post-data="' . $post['dt_user'] . '"
+                                        data-post-codigo="' . $post['cd_user'] . '"
+                                        data-post-categoria="' . $post['fk_categoria'] . '">Info</button>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarPostModal"
+                                        data-post-id="' . $post['id'] . '"
+                                        data-post-nome="' . $post['nome_post'] . '"
+                                        data-post-data="' . $post['dt_user'] . '"
+                                        data-post-codigo="' . $post['cd_user'] . '"
+                                        data-post-categoria="' . $post['fk_categoria'] . '">Editar</button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerPostModal" data-post-id="'.$post['id'].'">Remover</button>
+                            </td>';
+                        echo '</tr>';
+                    }
+                }else{ ?> 
+                    <tr>
+                        <td colspan="7" align="center">
+                            <h4 class="text-secondary mb-3">Não há nenhum post realizado ainda</h4>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -71,15 +81,40 @@
             <div class="modal-body">
                 <!-- Formulário de cadastro de post -->
                 <form action="processar/cadastrar_post.php" method="post" enctype="multipart/form-data">
-                    <!-- Campos do formulário -->
+                    <!-- Campos do formulário -->                    
+                    <label>Código do Usuário: <?php echo $_SESSION['id_usuario']; ?></label><br>
                     <label>Informe o nome do post:</label><br>
                     <input class="col-md-12" type="text" name="nome" placeholder="Nome do Post" required><br>
                     <label>Data</label><br>
-                    <input class="col-md-12" type="datetime-local" name="data" required><br>
-                    <label>Código do Usuário</label><br>
-                    <input class="col-md-12" type="number" name="codigo" placeholder="Código do Usuário" required><br>
+                    <input class="col-md-12" type="datetime-local" name="data" id="data" required><br>
+                    <script>
+                    // Obtém a data e hora atual
+                    var dataAtual = new Date();
+
+                    // Formata a data e hora atual para o formato esperado pelo input datetime-local
+                    var dataFormatada = dataAtual.getFullYear() + '-' + ('0' + (dataAtual.getMonth() + 1)).slice(-2) + '-' + ('0' + dataAtual.getDate()).slice(-2) + 'T' + ('0' + dataAtual.getHours()).slice(-2) + ':' + ('0' + dataAtual.getMinutes()).slice(-2);
+
+                    // Define o valor do campo datetime-local como a data e hora atual formatada
+                    document.getElementById('data').value = dataFormatada;
+                    </script>
+                    <input style="display:none;" class="col-md-12" type="number" name="codigo" placeholder="Código do Usuário" required value="<?php echo $_SESSION['id_usuario']; ?>">
                     <label>Código de Categoria</label><br>
-                    <input class="col-md-12" type="number" name="categoria" placeholder="ID da Categoria" required><br>
+                    <?php
+                    require_once 'backend/Categorias.php';
+
+                    // Instanciando o objeto Categoria
+                    $categoria = new Categoria();
+
+                    // Obtendo todas as categorias
+                    $categorias = $categoria->selectAllWhereDisplay();
+                    ?>
+
+                    <select class="col-md-12" name="categoria" required>
+                        <option value="" disabled selected>Selecione a Categoria</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?php echo $cat['id']; ?>"><?php echo $cat['nome']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <!-- Adicione outros campos conforme necessário -->
                     <label>Imagem</label><br>
                     <input class="col-md-12" type="file" name="imagem" accept="image/*" required><br>
@@ -136,10 +171,25 @@
                     <input class="col-md-12" type="text" name="nome_post" id="editarPost-nome" required><br>
                     <label>Data</label><br>
                     <input class="col-md-12" type="datetime-local" name="dt_user" id="editarPost-data" required><br>
-                    <label>Código do Usuário</label><br>
-                    <input class="col-md-12" type="number" name="cd_user" id="editarPost-codigo" required><br>
+                    <label>Código do Usuário: <?php echo $_SESSION['id_usuario']; ?></label><br>
+                    <input style="display:none;" class="col-md-12" type="number" name="cd_user" id="editarPost-codigo" required>
                     <label>Código de Categoria</label><br>
-                    <input class="col-md-12" type="number" name="fk_categoria" id="editarPost-categoria" required><br>
+                    <?php
+                    require_once 'backend/Categorias.php';
+
+                    // Instanciando o objeto Categoria
+                    $categoria = new Categoria();
+
+                    // Obtendo todas as categorias
+                    $categorias = $categoria->selectAllWhereDisplay();
+                    ?>
+
+                    <select class="col-md-12" name="categoria" required>
+                        <option value="" disabled selected>Selecione a Categoria</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?php echo $cat['id']; ?>"><?php echo $cat['nome']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                     <!-- Adicione outros campos conforme necessário -->
 
                     <br>

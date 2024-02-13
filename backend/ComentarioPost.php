@@ -29,6 +29,19 @@ class ComentarioPost {
         return $comentarios;
     }
 
+    public function countCommentsByFkPost($fk_post) {
+        $sql = "SELECT COUNT(*) AS total FROM comentarios_post WHERE fk_post=?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $fk_post);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+    
+        return $row['total'];
+    }
+    
+
     public function selectById($id) {
         $sql = "SELECT * FROM comentarios_post WHERE id=?";
         $stmt = $this->conexao->prepare($sql);

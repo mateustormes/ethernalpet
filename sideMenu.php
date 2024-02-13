@@ -101,16 +101,18 @@ session_start();
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="#" class="nav-item nav-link active" onclick="loadPage('adminPage.php')">Home</a>
-                    <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_categoria.php')">Categorias</a>
-                    <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_empresas.php')">Empresas</a>
+                    <?php if($_SESSION['admin'] == 'S'){ ?>
+                        <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_categoria.php')">Categorias</a>
+                        <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_empresas.php')">Empresas</a>
+                    <?php } ?>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_posts.php')">Posts</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_usuarios.php')">Usuarios</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_pagamentos.php')">Pagamentos</a>
-                    <a href="index.php" class="nav-item nav-link">Sair</a>;
+                    <a href="index.php" class="nav-item nav-link">Sair</a>
                 </div>
                 <!-- <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a> -->
             </div>
-            <a class="px-3 d-none d-lg-block"><?php echo "Bem vindo ".$_SESSION['usuario']; ?></a>
+            <a style="text-decoration: none;" class="px-3 d-none d-lg-block"><?php echo "Bem vindo ".$_SESSION['usuario']; ?></a>
         </nav>
     </div>
     <script>

@@ -66,17 +66,20 @@
                 <!-- Formulário de cadastro de item -->
                 <form action="processar/cadastrar_item.php" method="post" enctype="multipart/form-data">
                     <!-- Campos do formulário -->
-                    <input type="hidden" name="fk_post" value="<?php echo $_GET['id_post']; ?>">
-                    <label>Imagem</label>
-                    <input type="file" name="imagem" accept="image/*" required><br>
-                    <label>Nome do Pet</label>
-                    <input type="text" name="nome_pet" placeholder="Nome do Pet" required><br>
-                    <label>Informações do Pet</label>
-                    <textarea name="informacoes_pet" placeholder="Informações do Pet" required></textarea><br>
+                    <label>Nome do Pet:</label><br>
+                    <input class="col-md-12" type="text" name="nome_pet" placeholder="Nome do Pet" required><br>
+                    <input class="col-md-12" type="hidden" name="fk_post" value="<?php echo $_GET['id_post']; ?>">
+                    <label>Imagem</label><br>
+                    <input class="col-md-12" type="file" name="imagem" accept="image/*" required><br>
+                    
+                    <label>Informações do Pet</label><br>
+                    <textarea class="col-md-12" name="informacoes_pet" placeholder="Informações do Pet" required></textarea><br>
                     <!-- Adicione outros campos conforme necessário -->
 
                     <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
                 </form>
 
             </div>
@@ -123,16 +126,19 @@
                     <input type="hidden" name="id_item" id="editarItem-id" value="">
 
                     <!-- Campos do formulário preenchidos com os dados do item -->
-                    <label>Imagem</label>
-                    <input type="file" name="imagem" accept="image/*" required><br>
-                    <label>Nome do Pet</label>
-                    <input type="text" name="nome_pet" id="editarItem-pet" required><br>
-                    <label>Informações do Pet</label>
-                    <textarea name="informacoes_pet" id="editarItem-info" required></textarea><br>
+                    <label>Nome do Pet</label><br>
+                    <input class="col-md-12" type="text" name="nome_pet" id="editarItem-pet" required><br>
+                    <label>Imagem</label><br>
+                    <input class="col-md-12" type="file" name="imagem" accept="image/*" required><br>
+                    
+                    <label>Informações do Pet</label><br>
+                    <textarea class="col-md-12" name="informacoes_pet" id="editarItem-info" required></textarea><br>
                     <!-- Adicione outros campos conforme necessário -->
 
                     <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    </center>
                 </form>
             </div>
         </div>

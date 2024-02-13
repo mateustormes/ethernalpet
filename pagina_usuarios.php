@@ -1,9 +1,9 @@
 <?php include('sideMenu.php'); ?>
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Usuários</h2>
-    
-    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#cadastroModal">Cadastrar</button>
-
+    <?php if($_SESSION['admin'] == 'S'){ ?>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#cadastroModal">Cadastrar</button>
+    <?php } ?>
     <!-- Tabela Responsiva -->
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -21,30 +21,44 @@
                 <?php
                 require_once 'backend/Usuarios.php';
                 $usuarios = new Usuarios();
-                $usuariosList = $usuarios->selectAll();
 
-                foreach ($usuariosList as $usuario) {
-                    echo '<tr>';
-                    echo '<td>' . $usuario['id'] . '</td>';
-                    echo '<td>' . $usuario['nome'] . '</td>';
-                    echo '<td>' . $usuario['email'] . '</td>';
-                    echo '<td>' . ($usuario['administrador'] == 'S' ? 'Sim' : 'Não') . '</td>';
-                    echo '<td>
-                            <button onclick="showInfo(' . $usuario['id'].','.$usuario['nome'].','.$usuario['email'] . ')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoModal" 
-                                    data-user-id="' . $usuario['id'] . '" 
-                                    data-user-nome="' . $usuario['nome'] . '"
-                                    data-user-email="' . $usuario['email'] . '"
-                                    data-user-admin="' . $usuario['administrador'] . '">Info</button>
-                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
-                                    data-user-id="' . $usuario['id'] . '" 
-                                    data-user-nome="' . $usuario['nome'] . '"
-                                    data-user-email="' . $usuario['email'] . '"
-                                    data-user-admin="' . $usuario['administrador'] . '">Editar</button>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerModal" data-user-id="' . $usuario['id'] . '">Remover</button>
-                        </td>';
-                    echo '</tr>';
+                if($_SESSION['admin'] == 'S'){                    
+                    $usuariosList = $usuarios->selectAll();
+                }else{
+                    $usuariosList = $usuarios->selectByUserId($_SESSION['id_usuario']);
                 }
-                ?>
+                if(count($usuariosList) > 0 ){
+                    foreach ($usuariosList as $usuario) {
+                        echo '<tr>';
+                        echo '<td>' . $usuario['id'] . '</td>';
+                        echo '<td>' . $usuario['nome'] . '</td>';
+                        echo '<td>' . $usuario['email'] . '</td>';
+                        echo '<td>' . ($usuario['administrador'] == 'S' ? 'Sim' : 'Não') . '</td>';
+                        echo '<td>
+                                <button onclick="showInfo(' . $usuario['id'].','.$usuario['nome'].','.$usuario['email'] . ')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoModal" 
+                                        data-user-id="' . $usuario['id'] . '" 
+                                        data-user-nome="' . $usuario['nome'] . '"
+                                        data-user-email="' . $usuario['email'] . '"
+                                        data-user-admin="' . $usuario['administrador'] . '">Info</button>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarModal" 
+                                        data-user-id="' . $usuario['id'] . '" 
+                                        data-user-nome="' . $usuario['nome'] . '"
+                                        data-user-email="' . $usuario['email'] . '"
+                                        data-user-admin="' . $usuario['administrador'] . '">Editar</button>';
+                                        
+                                if($_SESSION['admin'] == 'S'){
+                                    echo '<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#removerModal" data-user-id="' . $usuario['id'] . '">Remover</button>';
+                                }
+                            echo '</td>';
+                        echo '</tr>';
+                    }
+                }else{ ?> 
+                    <tr>
+                        <td colspan="7" align="center">
+                            <h4 class="text-secondary mb-3">Não há nenhum usuario cadastrado.</h4>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -117,19 +131,20 @@
                 <form action="processar/editar_usuario.php" method="post">
                     <!-- Campos do formulário preenchidos com os dados do usuário -->
                     <input type="hidden" name="id_usuario" value="<?php echo $usuario['id']; ?>">
-                    <input type="text" name="nome" id="editar-nome" required>
-                    <input type="email" name="email" id="editar-email" required>
-                    <input type="text" name="admin" id="admin" required value="<?php echo $usuario['administrador']; ?>">
+                    
+                    <label>Nome:</label><br>
+                    <input type="text" name="nome" id="editar-nome" required><br>                    
+                    <label>E-mail:</label><br>
+                    <input type="email" name="email" id="editar-email" required><br>
+                    
+                    <label>Administrador: <?php if($usuario['administrador'] == 'S') { echo 'Sim';}else{ echo'Não';} ?></label><br>
+                    <input style="display:none;" type="text" name="admin" id="admin" required value="<?php echo $usuario['administrador']; ?>">
                     <!-- Adicione outros campos conforme necessário -->
 
-                    <!-- Botão de Alterar Admin -->
-                    <div class="form-group">
-                        <label for="adminCheckbox">Administrador:</label>
-                        <input type="checkbox" id="adminCheckbox" name="admin" value="1">
-                    </div>
-
                     <!-- Botão de enviar -->
-                    <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Salvar Edições</button>
+                    </center>
                 </form>
             </div>
         </div>

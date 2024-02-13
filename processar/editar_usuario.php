@@ -1,6 +1,6 @@
 <?php
 require_once '../backend/Usuarios.php';
-
+print_r($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Certifique-se de que os dados foram recebidos do formulário
     if (isset($_POST['id_usuario'], $_POST['nome'], $_POST['email'], $_POST['admin'])) {

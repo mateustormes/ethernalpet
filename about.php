@@ -82,7 +82,7 @@
     <!-- Team Start -->
     <div class="container mt-5 pt-5 pb-3">
         <div class="d-flex flex-column text-center mb-5">
-            <h1 class="display-4 m-0">Meet Our <span class="text-primary">Team Member</span></h1>
+            <!-- <h1 class="display-4 m-0">Nossa <span class="text-primary">Equipe</span></h1> -->
         </div>
         <div class="row">
             <?php
@@ -92,7 +92,7 @@
             $ownerObj = new Owner();
 
             // Recupere todos os proprietários
-            $owners = $ownerObj->selectAll();
+            $owners = [];//$ownerObj->selectAll();
             ?>
 
             <!-- Loop para exibir cada proprietário -->
@@ -118,8 +118,10 @@
                     </div>
                 </div>
             <?php endforeach; 
-            }else{ ?>            
-                <h4 class="text-secondary mb-3">Não há nenhum membro Cadastrado</h4>
+            }else{ ?>
+                <center>
+                    <!-- <h4 class="text-secondary mb-3">Não há nenhum membro Cadastrado</h4> -->
+                </center>
             <?php } ?>
         </div>
     </div>

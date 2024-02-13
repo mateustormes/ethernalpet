@@ -1,4 +1,5 @@
-<?php include('sideMenu.php'); ?>
+<?php include('sideMenu.php');
+?>
 
 Pagina admin
 

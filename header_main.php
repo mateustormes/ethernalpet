@@ -93,7 +93,7 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
             <a href="" class="navbar-brand d-block d-lg-none">
-                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary"><?php echo $namesSite['0']; ?></span><?php echo $namesSite['1']; ?></h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -101,15 +101,10 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="index.php" class="nav-item nav-link active">Home</a>
-                    
-                    <?php 
-                    require_once 'backend/Categorias.php'; // Certifique-se de que o nome do arquivo corresponda ao utilizado no backend
-
-                    $categoriaObj = new Categoria();
-                    $categorias = $categoriaObj->selectAllWhereDisplay();
-                    foreach ($categorias as $categoria): ?>
-                        <a href="blog.php?id=<?= $categoria['id'];?>" class="nav-item nav-link"><?= $categoria['nome']; ?></a>
-                    <?php endforeach; ?>
+                    <?php if (empty($_SESSION)) { ?>
+                        <a href="index.php" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">Acessar</a>
+                        <a href="index.php" class="nav-item nav-link" data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
+                    <?php } ?>
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
@@ -122,11 +117,8 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
                     <a href="contact.php" class="nav-item nav-link">Contato</a>
                     
                 </div>
-                <?php if (empty($_SESSION)) { ?>
-                    <a href="#" class="btn btn-lg btn-success px-3 d-none d-lg-block" data-toggle="modal" data-target="#loginModal">Acessar</a>
-                    <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block"data-toggle="modal" data-target="#cadastroModal">Cadastrar</a>
-                <?php }else{ ?>      
-                    <a href="adminPage.php" style="text-decoration: none;" class="px-3 d-none d-lg-block"><?php echo "Bem vindo ".$_SESSION['usuario']; ?></a>
+                <?php if (!empty($_SESSION)) { ?>     
+                    <a href="adminPage.php" style="text-decoration: none;" class="nav-item nav-link px-3 d-none d-lg-block"><?php echo "Bem vindo ".$_SESSION['usuario']; ?></a>
                 <?php } ?>
             </div>
         </nav>
@@ -155,13 +147,13 @@ $namesSite = explode(" ", $configuracoesSites['name_site']);
                             <label for="inputPassword">Senha</label>
                             <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Informe sua senha">
                         </div>
-                        <button type="submit" class="btn btn-primary">Acessar</button>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Acessar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
                     </form>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#cadastroModal">Cadastrar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

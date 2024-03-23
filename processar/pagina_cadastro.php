@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          // Redirecione de volta para a página anterior após o cadastro
          $_SESSION['mensagem'] = "Usuário cadastrado com sucesso!";
          
-        header("Location: ../pagina_usuarios.php?mensagem=" . urlencode($_SESSION['mensagem']));
+        header("Location: ../index.php?mensagem=" . urlencode($_SESSION['mensagem']));
      } else {
          // Exiba uma mensagem de erro se o e-mail já existir
          $_SESSION['mensagem'] = "Erro ao cadastrar o usuário. Por favor, tente novamente.";

@@ -8,7 +8,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-4 mb-5">
-                        <h5 class="text-primary mb-4">Get In Touch</h5>
+                        <h5 class="text-primary mb-4">Entre em contato</h5>
                         <p><i class="fa fa-map-marker-alt mr-2"></i><?php echo $configuracoesSites['endereco_contato'];?></p>
                         <p><i class="fa fa-phone-alt mr-2"></i><?php echo $configuracoesSites['telefone_contato'];?></p>
                         <p><i class="fa fa-envelope mr-2"></i><?php echo $configuracoesSites['email_contato'];?></p>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
-                        <h5 class="text-primary mb-4">Popular Links</h5>
+                        <h5 class="text-primary mb-4">Links Popular</h5>
                         
                         <div class="d-flex flex-column justify-content-start">
                             <?php 
@@ -49,8 +49,8 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/jquery-3.4.1.min.js"></script>
+    <script src="lib/bootstrap.bundle.min.js"></script>
     
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>

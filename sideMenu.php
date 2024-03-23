@@ -5,7 +5,7 @@ require_once 'backend/ConfiguracoesSite.php';
 $configuracoesSite = new ConfiguracoesSite();
 $configuracoesSites = $configuracoesSite->selectAll();
 $namesSite = explode(" ", $configuracoesSites['name_site']);
-session_start(); 
+
 ?>
 
 <head>
@@ -93,7 +93,7 @@ session_start();
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
             <a href="" class="navbar-brand d-block d-lg-none">
-                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary"><?php echo $namesSite['0']; ?></span><?php echo $namesSite['1']; ?></h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -108,7 +108,8 @@ session_start();
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_posts.php')">Posts</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_usuarios.php')">Usuarios</a>
                     <a href="#" class="nav-item nav-link" onclick="loadPage('pagina_pagamentos.php')">Pagamentos</a>
-                    <a href="index.php" class="nav-item nav-link">Sair</a>
+                    <a class="nav-item nav-link" id="logoutButton">Sair</a>
+                    <!-- <a href="index.php" >Sair</a> -->
                 </div>
                 <!-- <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a> -->
             </div>
@@ -120,5 +121,17 @@ session_start();
             // Simplesmente redirecione para a página desejada
             window.location.href = page;
         }
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Faz uma requisição assíncrona para executar o logout
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'processar/logout.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redireciona para a página index.php após o logout ser concluído
+                    window.location.href = 'index.php';
+                }
+            };
+            xhr.send();
+        });
     </script>
     <!-- Navbar End -->

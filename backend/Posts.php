@@ -62,6 +62,12 @@ class Posts {
                 GROUP BY posts.id";
     
         $result = $this->conexao->query($sql);
+    
+        // Verifica se a consulta foi bem-sucedida
+        if (!$result) {
+            die('Error executing query: ' . $this->conexao->error);
+        }
+    
         $posts = [];
     
         while ($row = $result->fetch_assoc()) {
@@ -70,6 +76,7 @@ class Posts {
     
         return $posts;
     }
+    
     
     
     

@@ -1,4 +1,7 @@
-<?php include('sideMenu.php'); ?>
+<?php 
+
+session_start(); 
+include('sideMenu.php'); ?>
 
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Itens do Post</h2>

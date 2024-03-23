@@ -1,4 +1,7 @@
-<?php include('sideMenu.php'); ?>
+<?php 
+
+session_start(); 
+include('sideMenu.php'); ?>
 
 
 <div class="container mt-5">

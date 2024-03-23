@@ -1,6 +1,7 @@
-<?php include('sideMenu.php'); ?>
+<?php session_start(); include('sideMenu.php'); 
+?>
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Usuários</h2>
+    <h2 class="mb-4">Opções de Pagamentos</h2>
 
        <!-- Pricing Plan Start -->
        <div class="container-fluid bg-light pt-5 pb-4">

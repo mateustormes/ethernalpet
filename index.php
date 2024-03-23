@@ -1,6 +1,75 @@
 <?php 
 include('header_main.php'); 
 ?>
+  <style>
+        .categoria {
+            background-image: url('img/price-1.jpg'); /* Substitua pelo caminho da imagem de fundo desejada */
+            background-size: cover;
+            background-position: center;
+            padding: 20px; /* Ajuste o preenchimento conforme necessário */
+            min-width: 100%; /* Largura mínima dos cards */
+            margin-top: 5%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .imagem-descricao {
+            text-align: center;
+            margin-top: 30px; /* Espaçamento entre os cards e a imagem/descrição */
+        }
+
+        .imagem-descricao img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .imagem-descricao h2 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .imagem-descricao p {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<?php 
+require_once 'backend/Categorias.php';
+
+$categoriaObj = new Categoria();
+$categorias = $categoriaObj->selectAllWhereDisplay();
+
+// Dividindo as categorias em grupos de 4
+$categoria_groups = array_chunk($categorias, 4);
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="categoria-group" id="categoriaGroup">
+                <?php foreach ($categoria_groups as $groupIndex => $group): ?>
+                    <?php foreach ($group as $categoria): 
+                        $nome = "img/".$categoria['nome'].".jpg";                   
+                        ?>
+                        <div class="categoria col-md-3" style="background-image: url(<?php echo $nome; ?>);">
+                            <p style="color:green;">Entre e confira:</p>
+                            <h3 style="color:green;"><?= $categoria['nome']; ?></h3>
+                            <a href="blog.php?id=<?= $categoria['id'];?>" class="btn btn-primary">Ver Mais</a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- About Start -->
     <div class="container py-5">

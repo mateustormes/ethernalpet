@@ -1,4 +1,5 @@
-<?php include('sideMenu.php'); ?>
+<?php 
+session_start();include('sideMenu.php');  ?>
 
 
 
